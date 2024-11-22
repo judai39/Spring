@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="account_id" name="account" class="com.haoyudu.account.Account">
+        <constructor-arg name="name" value="yuhao"/>
+        <constructor-arg name="money" value="10000"/>
+    </bean>
+
+    <bean id="accountDao_id" name="accountDao" class="com.haoyudu.dao.AccountDao">
+        <property name="account" ref="account_id"/>
+    </bean>
+
+    <bean id="accounts_id" name="accounts" class="com.haoyudu.accounts.Accounts">
+        <constructor-arg name="name" value="accounts[]"/>
+        <constructor-arg name="num" value="0"/>
+    </bean>
+    
+<!--    <bean id="accountService_id" name="accountService" class="com.haoyudu.service.AccountServiceImp" init-method="init" destroy-method="destroy">-->
+<!--        <property name="accountDao" ref="accountDao_id"/>-->
+<!--    </bean> 下面是按照name自动注入-->
+    <bean id="accountService_id" name="accountService" class="com.haoyudu.service.AccountServiceImp" init-method="init" destroy-method="destroy" autowire="byName"/>
+
+    <bean id="factory" class="com.haoyudu.factory.AccountFactory"/>
+
+</beans>
